@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{%block title%} To Do Application {%endblock%}
+{% block body %}    
+    <div class="container my-3">
+        <h1>Add A Task in TO Do list</h1>
+        <form action="/" method="post">
+            <div class="mb-3">
+              <label for="task-title" class="form-label">Enter task name :</label>
+              <input type="text" class="form-control" name="task-title" id="task-title" >
+            </div>
+            <div class="mb-3">
+                <label for="task-desc" class="form-label">Task Description : </label>
+                <input type="text" class="form-control" id="task-desc" name="task-desc" >
+              </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+    </div>
+      <div class="container my-3">
+        <h1>Today, To Do List</h1>
+        {%if context_list|length == 0 %}
+        <center><h2>No Records</h2></center>
+         {%else%}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Task Description</th>
+                <th scope="col">Time</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for todo in context_list %}
+              <tr>
+                <th>{{loop.index}}</th>
+                <td>{{todo.title}}</td>
+                <td>{{todo.description}}</td>
+                <td>{{todo.date_created}}</td>
+                <td>
+                    <a type="button" href="/delete/{{todo.id}}" class="btn btn-sm btn-outline-success mx-1">Delete</a>
+                    <a type="button" href="/update/{{todo.id}}" class="btn btn-sm btn-outline-success mx-1">Update</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {% endfor %}
+              {%endif%}
+      </div>
+    <script src="/static/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{%block title%} Update Todo Task {%endblock%}
+{%block body%}
+<div class="container my-3">
+    <h1>Update Task No. {{context_list.id}} </h1>
+    <form action="/update/{{context_list.id}}" method="post">
+        <div class="mb-3">
+          <label for="task-title" class="form-label">Enter task name :</label>
+          <input type="text" class="form-control" value="{{context_list.title}}" name="task-title" id="task-title" >
+        </div>
+        <div class="mb-3">
+            <label for="task-desc" class="form-label">Task Description : </label> 
+            <input type="text" class="form-control" value="{{context_list.description}}" id="task-desc" name="task-desc" >
+          </div>
+        <button type="submit" class="btn btn-success">Update</button>
+      </form>
+</div>
+{%endblock%}
